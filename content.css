@@ -1,14 +1,15 @@
 .page-bg{
   position:relative;
   min-height:100svh;
-  overflow:hidden;
+  overflow-x:hidden;
+  
   background:
     radial-gradient(circle at top left, rgba(53,208,182,.12), transparent 24%),
     radial-gradient(circle at top right, rgba(243,180,77,.10), transparent 22%),
     linear-gradient(180deg, #f7f7f2 0%, #f3f4ee 58%, #eef1eb 100%);
+
   color:#111827;
 }
-
 .page-glow{
   position:absolute;
   border-radius:50%;

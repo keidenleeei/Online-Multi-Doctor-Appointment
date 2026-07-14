@@ -6,6 +6,7 @@ include "config.php";
 
 $sql = "
 SELECT 
+    doctors.doctor_id，
     users.full_name,
     doctors.specialization,
     doctors.experience,
@@ -157,11 +158,13 @@ $result = mysqli_query($conn, $sql);
 
 
 
-    <a href="booking.php" class="home-btn home-btn--dark">
+    <a 
+href="booking.php?doctor_id=<?php echo $doctor['doctor_id']; ?>" 
+class="home-btn home-btn--dark">
 
-        Book Appointment
+    Book Appointment
 
-    </a>
+</a>
 
 
 

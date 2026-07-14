@@ -1,10 +1,100 @@
 <?php
+
 session_start();
 
+include "config.php";
+
+
 if (!isset($_SESSION['user_id'])) {
+
     header("Location: login.php");
     exit();
+
 }
+
+
+$user_id = $_SESSION['user_id'];
+
+
+// Count user's appointments
+
+$booking_sql = "
+
+SELECT COUNT(*) AS total
+
+FROM appointments
+
+WHERE patient_id='$user_id'
+
+";
+
+
+$booking_result = mysqli_query($conn,$booking_sql);
+
+$booking_data = mysqli_fetch_assoc($booking_result);
+
+$total_bookings = $booking_data['total'];
+
+
+
+
+// Count doctors
+
+$doctor_sql = "
+
+SELECT COUNT(*) AS total
+
+FROM doctors
+
+";
+
+
+$doctor_result = mysqli_query($conn,$doctor_sql);
+
+$doctor_data = mysqli_fetch_assoc($doctor_result);
+
+$total_doctors = $doctor_data['total'];
+
+
+
+
+// Get user's appointments
+
+
+$appointment_sql = "
+
+SELECT 
+
+users.full_name,
+doctors.specialization,
+appointments.appointment_date,
+appointments.status
+
+
+FROM appointments
+
+
+INNER JOIN doctors
+
+ON appointments.doctor_id = doctors.doctor_id
+
+
+INNER JOIN users
+
+ON doctors.user_id = users.user_id
+
+
+WHERE appointments.patient_id='$user_id'
+
+
+ORDER BY appointments.appointment_date ASC
+
+
+";
+
+
+$appointments = mysqli_query($conn,$appointment_sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +143,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
 <main class="wrap page-main">
+    
 
     <!-- Welcome Card -->
 
@@ -91,26 +182,112 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="stats" style="margin-top:1rem">
 
-                <div class="stat">
-                    <strong>28</strong>
-                    <span class="muted">Bookings</span>
-                </div>
 
-                <div class="stat">
-                    <strong>4</strong>
-                    <span class="muted">Doctors</span>
-                </div>
+<div class="stat">
 
-                <div class="stat">
-                    <strong>3</strong>
-                    <span class="muted">Roles</span>
-                </div>
+<strong>
+<?php echo $total_bookings; ?>
+</strong>
 
-            </div>
+<span class="muted">
+My Bookings
+</span>
+
+</div>
+
+
+
+<div class="stat">
+
+<strong>
+<?php echo $total_doctors; ?>
+</strong>
+
+<span class="muted">
+Doctors
+</span>
+
+</div>
+
+
+
+<div class="stat">
+
+<strong>
+<?php echo $_SESSION['role']; ?>
+</strong>
+
+<span class="muted">
+Role
+</span>
+
+</div>
+
+
+</div>
+
+<div style="margin-top:20px;">
+
+<h3>My Appointments</h3>
+
+
+<?php if(mysqli_num_rows($appointments)>0){ ?>
+
+
+<?php while($row=mysqli_fetch_assoc($appointments)){ ?>
+
+
+<div class="card glass-card">
+
+
+<p>
+Doctor:
+<strong>
+Dr. <?php echo htmlspecialchars($row['full_name']); ?>
+</strong>
+</p>
+
+
+<p>
+Specialization:
+<?php echo htmlspecialchars($row['specialization']); ?>
+</p>
+
+
+<p>
+Date:
+<?php echo htmlspecialchars($row['appointment_date']); ?>
+</p>
+
+
+<p>
+Status:
+<strong>
+<?php echo htmlspecialchars($row['status']); ?>
+</strong>
+</p>
+
+
+</div>
+
+
+<?php } ?>
+
+
+<?php }else{ ?>
+
+
+<p>
+No appointments yet.
+</p>
+
+
+<?php } ?>
+
+
+</div>
 
         </article>
-
-
 
         <article class="card glass-card">
 
@@ -131,6 +308,7 @@ if (!isset($_SESSION['user_id'])) {
     </section>
 
 </main>
+
 
 </body>
 </html>
