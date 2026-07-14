@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +29,35 @@
         </a>
 
         <nav class="home-nav__links" aria-label="Main navigation">
-          <a class="active" href="index.html">Home</a>
-          <a href="doctors.html">Doctors</a>
-          <a href="booking.html">Booking</a>
-          <a href="dashboard.html">Dashboard</a>
-        </nav>
 
-        <a class="home-nav__cta" href="login.html">Login</a>
+    <a class="active" href="index.php">Home</a>
+
+    <a href="doctors.php">Doctors</a>
+
+    <a href="booking.php">Booking</a>
+
+    <?php if(isset($_SESSION['user_id'])){ ?>
+
+        <a href="dashboard.php">Dashboard</a>
+
+    <?php } ?>
+
+</nav>
+
+        <?php if(isset($_SESSION['user_id'])){ ?>
+
+    <a class="home-nav__cta" href="logout.php">
+        Logout
+    </a>
+
+<?php }else{ ?>
+
+    <a class="home-nav__cta" href="login.php">
+        Login
+    </a>
+
+<?php } ?>
+
         </div>
     </header>
 
@@ -40,12 +65,27 @@
       <div class="home-hero__spacer home-hero__spacer--top"></div>
 
       <div class="home-copy">
+        <?php if(isset($_SESSION['user_id'])){ ?>
+
+<p style="
+margin-bottom:15px;
+font-size:18px;
+font-weight:600;
+color:#111827;
+">
+
+Welcome,
+<?php echo htmlspecialchars($_SESSION['name']); ?>
+
+</p>
+
+<?php } ?>
         <h1 class="home-title">
           <span class="animate-fade-up">Book faster.</span>
           <span class="animate-fade-up delay-1">Manage appointments effortlessly.</span>
         </h1>
 
-        <form class="home-search animate-fade-up delay-2" action="booking.html">
+        <form class="home-search animate-fade-up delay-2" action="booking.php">
           <input
             type="text"
             placeholder="Which doctor do you need today?"
@@ -59,9 +99,30 @@
         </p>
 
         <div class="home-actions animate-fade-up delay-4">
-          <a class="home-btn home-btn--dark" href="login.html">Login</a>
-          <a class="home-btn home-btn--light" href="booking.html">Book Appointment</a>
-        </div>
+
+<?php if(isset($_SESSION['user_id'])){ ?>
+
+    <a class="home-btn home-btn--dark" href="dashboard.php">
+        Dashboard
+    </a>
+
+    <a class="home-btn home-btn--light" href="booking.php">
+        Book Appointment
+    </a>
+
+<?php }else{ ?>
+
+    <a class="home-btn home-btn--dark" href="login.php">
+        Login
+    </a>
+
+    <a class="home-btn home-btn--light" href="booking.php">
+        Book Appointment
+    </a>
+
+<?php } ?>
+
+</div>
       </div>
 
       <div class="home-hero__spacer home-hero__spacer--middle"></div>
@@ -114,7 +175,7 @@
                   <strong>CareNest</strong>
                   <p>Online multi doctor appointment system</p>
                 </div>
-                <a class="home-main__button" href="dashboard.html">Open dashboard</a>
+                <a class="home-main__button" href="dashboard.php">Open dashboard</a>
               </div>
 
               <div class="home-stats">
