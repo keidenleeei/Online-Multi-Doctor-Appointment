@@ -6,7 +6,7 @@ include "config.php";
 
 $sql = "
 SELECT 
-    doctors.doctor_id，
+    doctors.doctor_id,
     users.full_name,
     doctors.specialization,
     doctors.experience,
