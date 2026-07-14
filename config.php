@@ -17,8 +17,6 @@ $conn = mysqli_connect(
 if (!$conn) {
 
     die("Database connection failed: " . mysqli_connect_error());
-
 }
-echo "Database connected";
 
 ?>
