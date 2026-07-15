@@ -4,6 +4,43 @@ session_start();
 
 include "config.php";
 
+// Delete doctor
+
+if(isset($_GET['delete_doctor'])){
+
+    $doctor_id = $_GET['delete_doctor'];
+
+    // Find corresponding user_id
+    $sql = "
+    SELECT user_id
+    FROM doctors
+    WHERE doctor_id='$doctor_id'
+    ";
+
+    $result = mysqli_query($conn,$sql);
+
+    $doctor = mysqli_fetch_assoc($result);
+
+    $user_id = $doctor['user_id'];
+
+    // Delete doctor record
+    mysqli_query($conn,"
+    DELETE FROM doctors
+    WHERE doctor_id='$doctor_id'
+    ");
+
+    // Delete user account
+    mysqli_query($conn,"
+    DELETE FROM users
+    WHERE user_id='$user_id'
+    ");
+
+    header("Location: admin.php");
+    exit();
+
+}
+
+
 if(!isset($_SESSION['user_id'])){
 
     header("Location: login.php");
@@ -90,6 +127,30 @@ ORDER BY appointments.appointment_date ASC
 
 $result = mysqli_query($conn, $sql);
 
+$doctor_sql = "
+
+SELECT
+
+doctors.doctor_id,
+
+users.full_name,
+
+doctors.specialization,
+
+doctors.experience,
+
+doctors.consultation_fee
+
+FROM doctors
+
+INNER JOIN users
+
+ON doctors.user_id = users.user_id
+
+";
+
+$doctor_result = mysqli_query($conn,$doctor_sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -162,15 +223,13 @@ Online Multi Doctor
 
 <tr>
 
-<th>Patient</th>
-
-<th>Doctor</th>
+<th>Name</th>
 
 <th>Specialization</th>
 
-<th>Date</th>
+<th>Experience</th>
 
-<th>Status</th>
+<th>Fee</th>
 
 <th>Action</th>
 
@@ -251,6 +310,86 @@ echo "-";
 <?php } ?>
 
 </table>
+
+<hr style="margin:40px 0;">
+
+<h2>Doctors List</h2>
+
+<table>
+
+<tr>
+
+<th>Name</th>
+
+<th>Specialization</th>
+
+<th>Experience</th>
+
+<th>Fee</th>
+
+</tr>
+
+<?php
+
+while($doctor=mysqli_fetch_assoc($doctor_result)){
+
+?>
+
+<tr>
+
+<td>
+
+Dr.
+
+<?php echo htmlspecialchars($doctor['full_name']); ?>
+
+</td>
+
+<td>
+
+<?php echo htmlspecialchars($doctor['specialization']); ?>
+
+</td>
+
+<td>
+
+<?php echo htmlspecialchars($doctor['experience']); ?>
+
+Years
+
+</td>
+
+<td>
+
+RM
+
+<?php echo number_format($doctor['consultation_fee'],2); ?>
+
+</td>
+
+<td>
+
+<a
+href="admin.php?delete_doctor=<?php echo $doctor['doctor_id']; ?>"
+class="btn secondary"
+onclick="return confirm('Delete this doctor?');">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+<?php
+
+}
+
+?>
+
+</table>
+
 
 </div>
 
