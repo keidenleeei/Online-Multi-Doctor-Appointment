@@ -91,6 +91,7 @@ if($_SESSION['role'] != "doctor"){
 
 }
 
+$doctor_user_id = $_SESSION['user_id'];
 
 ?>
 
@@ -135,10 +136,7 @@ Online Multi Doctor
 
 </a>
 
-
-
 <nav class="nav">
-
 
 <a href="index.php">
 Home
@@ -146,7 +144,12 @@ Home
 
 
 <a href="doctor_dashboard.php" class="active">
-Doctor Panel
+Dashboard
+</a>
+
+
+<a href="doctors.php">
+Doctors
 </a>
 
 
@@ -156,7 +159,6 @@ Logout
 
 
 </nav>
-
 
 </div>
 
@@ -217,11 +219,25 @@ Appointment Date:
 
 Status:
 
-<strong>
+<?php
 
-<?php echo htmlspecialchars($row['status']); ?>
+if($row['status']=="Pending"){
 
-</strong>
+    echo "<strong style='color:orange;'>Pending</strong>";
+
+}
+else if($row['status']=="Cancelled"){
+
+    echo "<strong style='color:red;'>Cancelled</strong>";
+
+}
+else{
+
+    echo "<strong style='color:green;'>Confirmed</strong>";
+
+}
+
+?>
 
 </p>
 

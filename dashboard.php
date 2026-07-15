@@ -370,13 +370,35 @@ No appointments yet.
 
             <ul class="list">
 
-                <li>Patient: Register, login and book appointments.</li>
 
-                <li>Doctor: Update availability and manage schedules.</li>
+<?php if($_SESSION['role']=="patient"){ ?>
 
-                <li>Admin: Manage users, doctors and bookings.</li>
+<li>
+Patient: Book appointments and view appointment status.
+</li>
 
-            </ul>
+<?php } ?>
+
+
+<?php if($_SESSION['role']=="doctor"){ ?>
+
+<li>
+Doctor: View and manage patient appointments.
+</li>
+
+<?php } ?>
+
+
+<?php if($_SESSION['role']=="admin"){ ?>
+
+<li>
+Admin: Manage users, doctors and appointments.
+</li>
+
+<?php } ?>
+
+
+</ul>
 
         </article>
 
