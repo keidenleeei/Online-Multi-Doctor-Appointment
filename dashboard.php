@@ -15,6 +15,24 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Cancel appointment
+
+if(isset($_GET['cancel'])){
+
+    $appointment_id = $_GET['cancel'];
+
+    $delete_sql = "
+    DELETE FROM appointments
+    WHERE appointment_id='$appointment_id'
+    AND patient_id='$user_id'
+    ";
+
+    mysqli_query($conn, $delete_sql);
+
+    header("Location: dashboard.php");
+    exit();
+
+}
 
 // Count user's appointments
 
@@ -65,6 +83,7 @@ $appointment_sql = "
 
 SELECT 
 
+appointments.appointment_id,
 users.full_name,
 doctors.specialization,
 appointments.appointment_date,
@@ -267,6 +286,14 @@ Status:
 </strong>
 </p>
 
+<a
+href="dashboard.php?cancel=<?php echo $row['appointment_id']; ?>"
+class="btn secondary"
+onclick="return confirm('Are you sure you want to cancel this appointment?');">
+
+Cancel Appointment
+
+</a>
 
 </div>
 
