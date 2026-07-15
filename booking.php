@@ -22,12 +22,28 @@ if(!isset($_SESSION['user_id'])){
 $patient_id = $_SESSION['user_id'];
 $selected_doctor = "";
 
+
 if(isset($_GET['doctor_id'])){
 
     $selected_doctor = $_GET['doctor_id'];
 
 }
 
+
+if(isset($_POST['doctor_id'])){
+
+    $selected_doctor = $_POST['doctor_id'];
+
+}
+
+
+$selected_schedule = "";
+
+if(isset($_GET['schedule_id'])){
+
+    $selected_schedule = $_GET['schedule_id'];
+
+}
 
 
 // Submit booking
@@ -36,8 +52,31 @@ if(isset($_POST['submit_booking'])){
 
 
     $doctor_id = $_POST['doctor_id'];
-    $date = $_POST['appointment_date'];
 
+    $schedule_id = $_POST['schedule_id'];
+
+
+
+    // Get appointment date from schedule
+
+    $schedule_query = "
+
+    SELECT available_date
+
+    FROM schedules
+
+    WHERE schedule_id='$schedule_id'
+
+    ";
+
+
+    $schedule_result = mysqli_query($conn,$schedule_query);
+
+
+    $schedule_data = mysqli_fetch_assoc($schedule_result);
+
+
+    $date = $schedule_data['available_date'];
 
 
     $sql = "
@@ -45,18 +84,20 @@ if(isset($_POST['submit_booking'])){
     (
         patient_id,
         doctor_id,
+        schedule_id,
         appointment_date,
         status
     )
 
     VALUES
 
-    (
-        '$patient_id',
-        '$doctor_id',
-        '$date',
-        'Pending'
-    )
+(
+    '$patient_id',
+    '$doctor_id',
+    '$schedule_id',
+    '$date',
+    'Pending'
+)
     ";
 
 
@@ -111,9 +152,30 @@ WHERE users.role='doctor'
 
 $doctors = mysqli_query($conn,$doctor_sql);
 
+// Get schedules
 
+$schedule_sql = "
+
+SELECT
+
+schedules.schedule_id,
+schedules.doctor_id,
+schedules.available_date,
+schedules.start_time,
+schedules.end_time
+
+FROM schedules
+
+WHERE schedules.doctor_id='$selected_doctor'
+
+ORDER BY available_date ASC
+
+";
+
+$schedules = mysqli_query($conn,$schedule_sql);
 
 ?>
+
 
 
 
@@ -250,7 +312,10 @@ disabled>
 Doctor
 
 
-<select name="doctor_id" required>
+<select 
+name="doctor_id" 
+required
+onchange="this.form.submit()">
 
 
 <option value="">
@@ -307,19 +372,64 @@ Dr.
 
 <label class="field">
 
-Date
+Available Schedule
 
-<input 
 
-type="date"
+<select name="schedule_id" required>
 
-name="appointment_date"
 
-required>
+<option value="">
+
+Select Schedule
+
+</option>
+
+
+
+<?php while($schedule=mysqli_fetch_assoc($schedules)){ ?>
+
+
+<option
+
+value="<?php echo $schedule['schedule_id']; ?>"
+
+<?php
+
+if($selected_schedule==$schedule['schedule_id']){
+
+echo "selected";
+
+}
+
+?>
+
+>
+
+
+<?php echo $schedule['available_date']; ?>
+
+
+|
+
+<?php echo $schedule['start_time']; ?>
+
+
+-
+
+
+<?php echo $schedule['end_time']; ?>
+
+
+</option>
+
+
+<?php } ?>
+
+
+</select>
 
 
 </label>
-
 
 
 
