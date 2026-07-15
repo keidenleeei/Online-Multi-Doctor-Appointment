@@ -34,8 +34,23 @@ if(isset($_POST['login'])){
         $_SESSION['role'] = $user['role'];
 
 
-        header("Location: dashboard.php");
-        exit();
+        if($_SESSION['role']=="admin"){
+
+    header("Location: admin.php");
+
+}
+elseif($_SESSION['role']=="doctor"){
+
+    header("Location: doctor_dashboard.php");
+
+}
+else{
+
+    header("Location: dashboard.php");
+
+}
+
+exit();
 
 
     }else{
