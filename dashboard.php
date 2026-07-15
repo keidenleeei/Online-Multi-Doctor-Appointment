@@ -21,13 +21,14 @@ if(isset($_GET['cancel'])){
 
     $appointment_id = $_GET['cancel'];
 
-    $delete_sql = "
-    DELETE FROM appointments
+    $update_sql = "
+    UPDATE appointments
+    SET status='Cancelled'
     WHERE appointment_id='$appointment_id'
     AND patient_id='$user_id'
     ";
 
-    mysqli_query($conn, $delete_sql);
+    mysqli_query($conn, $update_sql);
 
     header("Location: dashboard.php");
     exit();
@@ -280,20 +281,53 @@ Date:
 
 
 <p>
+
 Status:
-<strong>
-<?php echo htmlspecialchars($row['status']); ?>
-</strong>
+
+<?php
+
+if($row['status']=="Pending"){
+
+    echo "<strong style='color:orange;'>Pending</strong>";
+
+}
+else if($row['status']=="Cancelled"){
+
+    echo "<strong style='color:red;'>Cancelled</strong>";
+
+}
+else{
+
+    echo "<strong style='color:green;'>Confirmed</strong>";
+
+}
+
+?>
+
 </p>
+
+<?php if($row['status']=="Pending"){ ?>
 
 <a
 href="dashboard.php?cancel=<?php echo $row['appointment_id']; ?>"
 class="btn secondary"
-onclick="return confirm('Are you sure you want to cancel this appointment?');">
+onclick="return confirm('Cancel this appointment?')">
 
 Cancel Appointment
 
 </a>
+
+<?php }else{ ?>
+
+<span
+class="btn secondary"
+style="cursor:default;opacity:0.6;">
+
+Cancelled
+
+</span>
+
+<?php } ?>
 
 </div>
 
