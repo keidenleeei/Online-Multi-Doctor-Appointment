@@ -145,17 +145,31 @@ $appointments = mysqli_query($conn,$appointment_sql);
 
         <nav class="nav">
 
-            <a href="index.php">Home</a>
+<a href="index.php">Home</a>
 
-            <a href="doctors.php">Doctors</a>
+<a href="doctors.php">Doctors</a>
 
-            <a href="booking.php">Booking</a>
+<?php
+if($_SESSION['role']=="patient"){
+?>
+<a href="booking.php">Booking</a>
+<?php
+}
+?>
 
-            <a class="active" href="dashboard.php">Dashboard</a>
+<a class="active" href="dashboard.php">Dashboard</a>
 
-            <a href="logout.php">Logout</a>
+<?php
+if($_SESSION['role']=="admin"){
+?>
+<a href="admin.php">Admin</a>
+<?php
+}
+?>
 
-        </nav>
+<a href="logout.php">Logout</a>
+
+</nav>
 
     </div>
 
