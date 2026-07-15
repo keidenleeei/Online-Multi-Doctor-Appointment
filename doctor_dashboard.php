@@ -147,6 +147,10 @@ Home
 Dashboard
 </a>
 
+<a href="doctor_schedule.php">
+Manage Schedule
+</a>
+
 
 <a href="doctors.php">
 Doctors
