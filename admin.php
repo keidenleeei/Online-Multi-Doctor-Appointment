@@ -403,6 +403,8 @@ echo "-";
 
 <th>Fee</th>
 
+<th>Action</th>
+
 </tr>
 
 <?php
@@ -444,6 +446,14 @@ RM
 </td>
 
 <td>
+
+<a
+href="edit_doctor.php?doctor_id=<?php echo $doctor['doctor_id']; ?>"
+class="btn primary">
+
+Edit
+
+</a>
 
 <a
 href="admin.php?delete_doctor=<?php echo $doctor['doctor_id']; ?>"
