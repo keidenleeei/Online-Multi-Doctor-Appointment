@@ -53,6 +53,82 @@ if($_SESSION['role'] != "admin"){
     die("Access Denied.");
 
 }
+
+// Add Doctor
+
+if(isset($_POST['add_doctor'])){
+
+    $full_name = $_POST['full_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $specialization = $_POST['specialization'];
+    $experience = $_POST['experience'];
+    $consultation_fee = $_POST['consultation_fee'];
+
+    // Check email
+
+    $check = mysqli_query($conn,"
+    SELECT *
+    FROM users
+    WHERE email='$email'
+    ");
+
+    if(mysqli_num_rows($check)>0){
+
+        echo "<script>alert('Email already exists.');</script>";
+
+    }else{
+
+        // Insert into users
+
+        mysqli_query($conn,"
+        INSERT INTO users
+        (
+            full_name,
+            email,
+            password,
+            phone,
+            role
+        )
+        VALUES
+        (
+            '$full_name',
+            '$email',
+            '$password',
+            '$phone',
+            'doctor'
+        )
+        ");
+
+        $user_id = mysqli_insert_id($conn);
+
+        // Insert into doctors
+
+        mysqli_query($conn,"
+        INSERT INTO doctors
+        (
+            user_id,
+            specialization,
+            experience,
+            consultation_fee
+        )
+        VALUES
+        (
+            '$user_id',
+            '$specialization',
+            '$experience',
+            '$consultation_fee'
+        )
+        ");
+
+        header("Location: admin.php");
+        exit();
+
+    }
+
+}
+
 // Confirm appointment
 
 if(isset($_GET['confirm'])){
@@ -389,6 +465,114 @@ Delete
 ?>
 
 </table>
+<hr style="margin:40px 0;">
+
+<h2>Add Doctor</h2>
+
+<form method="POST" action="admin.php">
+
+<label>
+
+Full Name
+
+<input
+type="text"
+name="full_name"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Email
+
+<input
+type="email"
+name="email"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Password
+
+<input
+type="password"
+name="password"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Phone
+
+<input
+type="text"
+name="phone"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Specialization
+
+<input
+type="text"
+name="specialization"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Experience
+
+<input
+type="number"
+name="experience"
+required>
+
+</label>
+
+<br><br>
+
+<label>
+
+Consultation Fee
+
+<input
+type="number"
+step="0.01"
+name="consultation_fee"
+required>
+
+</label>
+
+<br><br>
+
+<button
+class="btn primary"
+type="submit"
+name="add_doctor">
+
+Add Doctor
+
+</button>
+
+</form>
 
 
 </div>
