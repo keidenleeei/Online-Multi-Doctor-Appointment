@@ -4,13 +4,23 @@ session_start();
 include "config.php";
 
 
+$search = "";
+
+if(isset($_GET['search'])){
+
+    $search = $_GET['search'];
+
+}
+
 $sql = "
-SELECT 
-    doctors.doctor_id,
-    users.full_name,
-    doctors.specialization,
-    doctors.experience,
-    doctors.consultation_fee
+
+SELECT
+
+doctors.doctor_id,
+users.full_name,
+doctors.specialization,
+doctors.experience,
+doctors.consultation_fee
 
 FROM doctors
 
@@ -18,9 +28,22 @@ INNER JOIN users
 
 ON doctors.user_id = users.user_id
 
-WHERE users.role = 'doctor'
+WHERE users.role='doctor'
+
+AND
+(
+
+users.full_name LIKE '%$search%'
+
+OR
+
+doctors.specialization LIKE '%$search%'
+
+)
+
 ";
 
+$result = mysqli_query($conn,$sql);
 
 $result = mysqli_query($conn, $sql);
 
@@ -104,6 +127,45 @@ $result = mysqli_query($conn, $sql);
 
 
 <main class="wrap page-main">
+
+<form
+method="GET"
+action="doctors.php"
+style="margin-bottom:25px;">
+
+<input
+
+type="text"
+
+name="search"
+
+placeholder="Search doctor or specialization"
+
+value="<?php echo htmlspecialchars($search); ?>"
+
+style="padding:10px;width:300px;">
+
+<button
+
+class="btn primary"
+
+type="submit">
+
+Search
+
+</button>
+
+<a
+
+href="doctors.php"
+
+class="btn secondary">
+
+Reset
+
+</a>
+
+</form>
 
 
 <section class="grid-2 page-grid">
