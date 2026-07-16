@@ -85,7 +85,29 @@ if(isset($_POST['add_schedule'])){
 
     $end = $_POST['end_time'];
 
+$check_sql = "
 
+SELECT *
+
+FROM schedules
+
+WHERE doctor_id='$doctor_id'
+
+AND available_date='$date'
+
+AND (
+
+    '$start' < end_time
+
+    AND
+
+    '$end' > start_time
+
+)
+
+";
+
+$check_result = mysqli_query($conn,$check_sql);
 
     $insert = "
 
@@ -109,20 +131,25 @@ if(isset($_POST['add_schedule'])){
 
     ";
 
-if(mysqli_query($conn,$insert)){
+if(mysqli_num_rows($check_result)>0){
 
-
-    $message = "Schedule added successfully!";
-
-
-}else{
-
-
-    $message = "Failed to add schedule.";
-
+    $message = "Schedule already exists.";
 
 }
+else{
 
+    if(mysqli_query($conn,$insert)){
+
+        $message = "Schedule added successfully!";
+
+    }
+    else{
+
+        $message = "Failed to add schedule.";
+
+    }
+
+}
 
 }
 
@@ -232,7 +259,15 @@ Manage Schedule
 
 if($message!=""){
 
-echo "<p style='color:green;'>$message</p>";
+    if($message=="Schedule already exists."){
+
+        echo "<p style='color:red;'>$message</p>";
+
+    }else{
+
+        echo "<p style='color:green;'>$message</p>";
+
+    }
 
 }
 

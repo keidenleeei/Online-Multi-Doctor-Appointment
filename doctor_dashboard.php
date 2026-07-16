@@ -26,13 +26,20 @@ appointments.appointment_id,
 appointments.appointment_date,
 appointments.status,
 
-patient.full_name AS patient_name
+patient.full_name AS patient_name,
+
+schedules.start_time,
+schedules.end_time
 
 FROM appointments
 
 INNER JOIN users AS patient
 
 ON appointments.patient_id = patient.user_id
+
+INNER JOIN schedules
+
+ON appointments.schedule_id = schedules.schedule_id
 
 WHERE appointments.doctor_id = '$doctor_id'
 
@@ -216,6 +223,18 @@ Patient:
 Appointment Date:
 
 <?php echo htmlspecialchars($row['appointment_date']); ?>
+
+</p>
+
+<p>
+
+Time:
+
+<?php echo htmlspecialchars($row['start_time']); ?>
+
+-
+
+<?php echo htmlspecialchars($row['end_time']); ?>
 
 </p>
 
