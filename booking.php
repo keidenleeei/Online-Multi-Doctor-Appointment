@@ -166,7 +166,13 @@ schedules.end_time
 
 FROM schedules
 
+LEFT JOIN appointments
+
+ON schedules.schedule_id = appointments.schedule_id
+
 WHERE schedules.doctor_id='$selected_doctor'
+
+AND appointments.schedule_id IS NULL
 
 ORDER BY available_date ASC
 
