@@ -38,25 +38,25 @@ session_start();
   <main class="wrap page-main">
     <div style="text-align: center; margin-bottom: 2rem;">
       <h1 style="color: var(--accent); margin: 0; font-size: 2.5rem; font-weight: 700;">About Our System</h1>
-      <p style="color: var(--muted); margin-top: 0.5rem;">Ensuring safety, care, and reliable scheduling</p>
+      <p style="color: var(--muted); margin-top: 0.5rem;">A simple appointment system for patients and doctors</p>
     </div>
 
     <section class="grid-2 page-grid">
       <article class="card glass-card">
-        <h3 style="color: var(--accent); margin-bottom: 1rem; font-weight: 600;">The Problem We Solve</h3>
-        <p>Many veterinary clinics and pet healthcare providers still rely on manual appointment booking methods, such as phone calls or paper records. This legacy approach leads to high wait times, double-booking errors, and misplaced medical logs. Communication between clinic staff, doctors, and pet owners becomes fragmented.</p>
+        <h3 style="color: var(--accent); margin-bottom: 1rem; font-weight: 600;">The problem we solve</h3>
+        <p>Many clinics still rely on manual appointment booking methods such as phone calls or paper records. That approach creates long wait times, double-booking mistakes, and scattered appointment data.</p>
       </article>
 
       <article class="card glass-card">
-        <h3 style="color: var(--accent-2); margin-bottom: 1rem; font-weight: 600;">Our Redefined Goal</h3>
-        <p>The Bird Safety Doctor Appointment System offers a digital workspace built to streamline scheduling. By connecting patients (owners), veterinarians, and clinic managers in one interface, we eliminate scheduling friction. This ensures that help is delivered faster, records are secure, and care is predictable.</p>
+        <h3 style="color: var(--accent-2); margin-bottom: 1rem; font-weight: 600;">Our goal</h3>
+        <p>MedLink gives patients, doctors, and admins one place to manage scheduling, booking history, and doctor profiles without extra complexity.</p>
       </article>
     </section>
   </main>
 
   <footer class="footer">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>

@@ -1,23 +1,23 @@
-# Online Multi Doctor Appointment System
+# MedLink Appointment System
 
-This workspace now contains a simple 8-page website based on the proposal
-`IT Project Proposal LEI SHIHAO & Ooi Yan Sheng.pdf`.
+This workspace contains a simple PHP appointment system for patients, doctors, and admins.
 
 ## What is included
 
 - Home page
-- About / problem statement page
+- About page
 - Features page
 - Doctors page
 - Booking page
 - Dashboard page
-- Timeline page
+- Doctor dashboard
+- Admin panel
 
 ## How to use
 
-Open `index.html` in a browser. All pages use `styles.css`.
+Open `index.php` through a PHP server with MySQL enabled. Most pages use `styles.css`.
 
 ## Notes
 
-- This version is intentionally simple and split into 8 pages.
-- `schema.sql` includes the MySQL code for patients, doctors, and appointments.
+- The app uses `config.php` for database access.
+- Core tables used by the system are `users`, `doctors`, `schedules`, and `appointments`.

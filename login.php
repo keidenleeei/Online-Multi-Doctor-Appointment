@@ -13,7 +13,6 @@ if (isset($_POST['login'])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    // Prepare statement to query user by email
     $stmt = $conn->prepare("SELECT user_id, full_name, password, role FROM users WHERE email = ?");
     if ($stmt) {
         $stmt->bind_param("s", $email);
@@ -23,27 +22,26 @@ if (isset($_POST['login'])) {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            // Verify password using bcrypt hash, with a plaintext fallback for pre-existing records
             if (password_verify($password, $user['password']) || $password === $user['password']) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['name'] = $user['full_name'];
                 $_SESSION['role'] = $user['role'];
 
-                // Redirect based on user role
-                if ($_SESSION['role'] == "admin") {
+                if ($_SESSION['role'] === "admin") {
                     header("Location: admin.php");
-                } elseif ($_SESSION['role'] == "doctor") {
+                } elseif ($_SESSION['role'] === "doctor") {
                     header("Location: doctor_dashboard.php");
                 } else {
                     header("Location: dashboard.php");
                 }
                 exit();
-            } else {
-                $error = "Invalid email or password.";
             }
+
+            $error = "Invalid email or password.";
         } else {
             $error = "Invalid email or password.";
         }
+
         $stmt->close();
     } else {
         $error = "System error. Please try again later.";
@@ -75,22 +73,22 @@ if (isset($_POST['login'])) {
             </div>
 
             <h1>Welcome Back</h1>
-            <p>We are here to help make sure patients are safe and healthy. Log in to manage your appointments, schedules, and patient profiles.</p>
+            <p>Log in to manage appointments, schedules, and patient profiles.</p>
         </div>
 
         <div class="login-card">
             <h2>Sign In</h2>
             <p class="login-subtitle">Login to your workspace account</p>
 
-            <?php if ($error != "") { ?>
+            <?php if ($error !== "") { ?>
                 <p style="color: var(--danger); background: var(--danger-light); padding: 10px; border-radius: 8px; font-size: 14px; margin-bottom: 15px; font-weight: 500;">
-                    ⚠️ <?php echo htmlspecialchars($error); ?>
+                    ! <?php echo htmlspecialchars($error); ?>
                 </p>
             <?php } ?>
 
-            <?php if ($success != "") { ?>
+            <?php if ($success !== "") { ?>
                 <p style="color: var(--accent-2); background: var(--accent-2-light); padding: 10px; border-radius: 8px; font-size: 14px; margin-bottom: 15px; font-weight: 500;">
-                    ✅ <?php echo htmlspecialchars($success); ?>
+                    + <?php echo htmlspecialchars($success); ?>
                 </p>
             <?php } ?>
 
@@ -101,6 +99,7 @@ if (isset($_POST['login'])) {
                         type="email"
                         name="email"
                         placeholder="Enter your email"
+                        autocomplete="email"
                         required
                     />
                 </div>
@@ -111,6 +110,7 @@ if (isset($_POST['login'])) {
                         type="password"
                         name="password"
                         placeholder="Enter password"
+                        autocomplete="current-password"
                         required
                     />
                 </div>

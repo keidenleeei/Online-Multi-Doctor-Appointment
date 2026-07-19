@@ -11,10 +11,9 @@ if (isset($_POST['register'])) {
     $password = trim($_POST['password']);
     $confirm_password = trim($_POST['confirm_password']);
 
-    if ($password != $confirm_password) {
+    if ($password !== $confirm_password) {
         $message = "Passwords do not match.";
     } else {
-        // Prepare statement to check if email exists
         $check_stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
         if ($check_stmt) {
             $check_stmt->bind_param("s", $email);
@@ -24,19 +23,15 @@ if (isset($_POST['register'])) {
             if ($check_result->num_rows > 0) {
                 $message = "Email already exists.";
             } else {
-                // Securely hash the password using bcrypt
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-                // Prepare statement to insert new patient user
                 $insert_stmt = $conn->prepare("INSERT INTO users (full_name, email, password, phone, role) VALUES (?, ?, ?, ?, 'patient')");
                 if ($insert_stmt) {
                     $insert_stmt->bind_param("ssss", $full_name, $email, $hashed_password, $phone);
                     if ($insert_stmt->execute()) {
                         header("Location: login.php?registered=1");
                         exit();
-                    } else {
-                        $message = "Registration failed. Please try again.";
                     }
+                    $message = "Registration failed. Please try again.";
                     $insert_stmt->close();
                 } else {
                     $message = "System error. Please try again later.";
@@ -73,17 +68,17 @@ if (isset($_POST['register'])) {
                 </div>
             </div>
 
-            <h1>Welcome to Caring Hands</h1>
-            <p>We are here to help make sure your patients are safe, healthy, and happy. Schedule your medical visits easily.</p>
+            <h1>Welcome to MedLink</h1>
+            <p>Create a patient account to book appointments and manage your visits.</p>
         </div>
 
         <div class="login-card">
             <h2>Create Account</h2>
             <p class="login-subtitle">Register a new patient account</p>
 
-            <?php if ($message != "") { ?>
+            <?php if ($message !== "") { ?>
                 <p style="color: var(--danger); background: var(--danger-light); padding: 10px; border-radius: 8px; font-size: 14px; margin-bottom: 15px; font-weight: 500;">
-                    ⚠️ <?php echo htmlspecialchars($message); ?>
+                    ! <?php echo htmlspecialchars($message); ?>
                 </p>
             <?php } ?>
 
@@ -94,6 +89,7 @@ if (isset($_POST['register'])) {
                         type="text"
                         name="full_name"
                         placeholder="Enter your full name"
+                        autocomplete="name"
                         required
                     />
                 </div>
@@ -104,6 +100,7 @@ if (isset($_POST['register'])) {
                         type="email"
                         name="email"
                         placeholder="Enter your email"
+                        autocomplete="email"
                         required
                     />
                 </div>
@@ -114,6 +111,7 @@ if (isset($_POST['register'])) {
                         type="text"
                         name="phone"
                         placeholder="Enter your phone number"
+                        autocomplete="tel"
                         required
                     />
                 </div>
@@ -124,6 +122,7 @@ if (isset($_POST['register'])) {
                         type="password"
                         name="password"
                         placeholder="Enter password"
+                        autocomplete="new-password"
                         required
                     />
                 </div>
@@ -134,6 +133,7 @@ if (isset($_POST['register'])) {
                         type="password"
                         name="confirm_password"
                         placeholder="Confirm password"
+                        autocomplete="new-password"
                         required
                     />
                 </div>

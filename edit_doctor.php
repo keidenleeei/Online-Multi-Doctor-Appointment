@@ -2,13 +2,12 @@
 session_start();
 include "config.php";
 
-// Auth validation at the very top
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-if ($_SESSION['role'] != "admin") {
+if (($_SESSION['role'] ?? '') !== "admin") {
     die("Access Denied.");
 }
 
@@ -17,20 +16,16 @@ if (!isset($_GET['doctor_id'])) {
     exit();
 }
 
-$doctor_id = $_GET['doctor_id'];
-$message = "";
-$message_type = "";
+$doctor_id = (int)$_GET['doctor_id'];
 
-// Secure Update Doctor Handler using prepared statements
 if (isset($_POST['update_doctor'])) {
     $full_name = trim($_POST['full_name']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
     $specialization = trim($_POST['specialization']);
-    $experience = intval($_POST['experience']);
-    $consultation_fee = floatval($_POST['consultation_fee']);
+    $experience = (int)$_POST['experience'];
+    $consultation_fee = (float)$_POST['consultation_fee'];
 
-    // Get user_id securely
     $user_stmt = $conn->prepare("SELECT user_id FROM doctors WHERE doctor_id = ?");
     if ($user_stmt) {
         $user_stmt->bind_param("i", $doctor_id);
@@ -39,9 +34,8 @@ if (isset($_POST['update_doctor'])) {
 
         if ($user_result->num_rows > 0) {
             $user_data = $user_result->fetch_assoc();
-            $user_id = $user_data['user_id'];
+            $user_id = (int)$user_data['user_id'];
 
-            // Update users table securely
             $update_user_stmt = $conn->prepare("UPDATE users SET full_name = ?, email = ?, phone = ? WHERE user_id = ?");
             if ($update_user_stmt) {
                 $update_user_stmt->bind_param("sssi", $full_name, $email, $phone, $user_id);
@@ -49,7 +43,6 @@ if (isset($_POST['update_doctor'])) {
                 $update_user_stmt->close();
             }
 
-            // Update doctors table securely
             $update_doc_stmt = $conn->prepare("UPDATE doctors SET specialization = ?, experience = ?, consultation_fee = ? WHERE doctor_id = ?");
             if ($update_doc_stmt) {
                 $update_doc_stmt->bind_param("sidi", $specialization, $experience, $consultation_fee, $doctor_id);
@@ -59,24 +52,18 @@ if (isset($_POST['update_doctor'])) {
 
             header("Location: admin.php?updated=1");
             exit();
-        } else {
-            $message = "Doctor profile not found.";
-            $message_type = "error";
         }
+
         $user_stmt->close();
-    } else {
-        $message = "System error during update process.";
-        $message_type = "error";
     }
 }
 
-// Fetch doctor details securely using prepared statement
 $doctor = null;
 $detail_stmt = $conn->prepare("
-    SELECT users.full_name, users.email, users.phone, 
-           doctors.specialization, doctors.experience, doctors.consultation_fee 
-    FROM doctors 
-    INNER JOIN users ON doctors.user_id = users.user_id 
+    SELECT users.full_name, users.email, users.phone,
+           doctors.specialization, doctors.experience, doctors.consultation_fee
+    FROM doctors
+    INNER JOIN users ON doctors.user_id = users.user_id
     WHERE doctors.doctor_id = ?
 ");
 
@@ -129,7 +116,7 @@ if ($detail_stmt) {
   </header>
 
   <main class="wrap page-main" style="max-width: 680px;">
-    <div style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between;">
+    <div style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
       <div>
         <h1 style="color: var(--accent); margin: 0; font-weight: 700;">Edit Doctor</h1>
         <p style="color: var(--muted); margin-top: 0.25rem;">Modify specialist profiles and contact information.</p>
@@ -137,83 +124,41 @@ if ($detail_stmt) {
       <a href="admin.php" class="btn secondary" style="min-height: 2.5rem; padding: 0.25rem 1rem; border-radius: 8px; font-size: 0.88rem;">&larr; Back</a>
     </div>
 
-    <?php if ($message != "") { ?>
-      <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 2rem; font-size: 0.95rem; font-weight: 500;
-        <?php echo $message_type == 'success' ? 'color: #065f46; background: #d1fae5; border: 1px solid #a7f3d0;' : 'color: #b91c1c; background: #fee2e2; border: 1px solid #fca5a5;'; ?>">
-        <?php echo $message_type == 'success' ? '✅' : '⚠️'; ?> <?php echo htmlspecialchars($message); ?>
-      </div>
-    <?php } ?>
-
     <article class="card glass-card">
       <form method="POST" action="">
         <label class="field">
           Full Name
-          <input
-            type="text"
-            name="full_name"
-            value="<?php echo htmlspecialchars($doctor['full_name']); ?>"
-            required
-          />
+          <input type="text" name="full_name" value="<?php echo htmlspecialchars($doctor['full_name']); ?>" required />
         </label>
 
         <label class="field">
           Email Address
-          <input
-            type="email"
-            name="email"
-            value="<?php echo htmlspecialchars($doctor['email']); ?>"
-            required
-          />
+          <input type="email" name="email" value="<?php echo htmlspecialchars($doctor['email']); ?>" required />
         </label>
 
         <label class="field">
           Phone Number
-          <input
-            type="text"
-            name="phone"
-            value="<?php echo htmlspecialchars($doctor['phone']); ?>"
-            required
-          />
+          <input type="text" name="phone" value="<?php echo htmlspecialchars($doctor['phone']); ?>" required />
         </label>
 
         <label class="field">
           Clinical Specialization
-          <input
-            type="text"
-            name="specialization"
-            value="<?php echo htmlspecialchars($doctor['specialization']); ?>"
-            required
-          />
+          <input type="text" name="specialization" value="<?php echo htmlspecialchars($doctor['specialization']); ?>" required />
         </label>
 
         <label class="field">
           Years of Experience
-          <input
-            type="number"
-            name="experience"
-            value="<?php echo htmlspecialchars($doctor['experience']); ?>"
-            required
-          />
+          <input type="number" name="experience" value="<?php echo htmlspecialchars($doctor['experience']); ?>" required />
         </label>
 
         <label class="field">
           Consultation Fee (RM)
-          <input
-            type="number"
-            step="0.01"
-            name="consultation_fee"
-            value="<?php echo htmlspecialchars($doctor['consultation_fee']); ?>"
-            required
-          />
+          <input type="number" step="0.01" name="consultation_fee" value="<?php echo htmlspecialchars($doctor['consultation_fee']); ?>" required />
         </label>
 
         <div class="actions" style="margin-top: 1.5rem;">
-          <button class="btn primary" type="submit" name="update_doctor" style="border-radius: 12px; flex: 1;">
-            Save Changes
-          </button>
-          <a href="admin.php" class="btn secondary" style="border-radius: 12px; flex: 1;">
-            Cancel
-          </a>
+          <button class="btn primary" type="submit" name="update_doctor" style="border-radius: 12px; flex: 1;">Save Changes</button>
+          <a href="admin.php" class="btn secondary" style="border-radius: 12px; flex: 1;">Cancel</a>
         </div>
       </form>
     </article>

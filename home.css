@@ -1,4 +1,4 @@
-/* Modern Healthcare Landing Page Styles - home.css */
+
 
 .home-page {
   background: var(--bg);
@@ -14,7 +14,6 @@
   margin-top: auto;
 }
 
-/* Keep homepage containers aligned across sections */
 .home-page .wrap {
   width: min(1180px, calc(100% - 2rem));
 }
@@ -868,7 +867,7 @@
   }
 
   .floating-badge {
-    display: none; /* Hide floating badges on narrow viewports to avoid layout bugs */
+    display: none;
   }
 
   .features-grid,
