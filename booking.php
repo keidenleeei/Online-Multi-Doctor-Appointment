@@ -236,7 +236,7 @@ if (!empty($selected_doctor)) {
 
   <footer class="footer">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>

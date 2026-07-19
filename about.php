@@ -6,7 +6,7 @@ session_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Bird Safety Appointment System</title>
+  <title>About - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-bg">
@@ -18,7 +18,7 @@ session_start();
       <a class="brand" href="index.php">
         <span class="brand-mark">BS</span>
         <span>
-          Bird Safety
+          MedLink
           <small>Appointment System</small>
         </span>
       </a>

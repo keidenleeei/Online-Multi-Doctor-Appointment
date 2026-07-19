@@ -67,7 +67,7 @@ if ($specs_query) {
           <path fill="currentColor" d="M144 256 L27.598 256 L144 139.598 Z M256 207.5 L200 256 L200 56 L0 56 L48 0 L256 0 Z M0 204.402 L0 112 L92.402 112 Z" />
         </svg>
         <span>
-          Bird Safety
+           MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -101,10 +101,10 @@ if ($specs_query) {
           <span class="welcome-badge">Welcome back, <?php echo htmlspecialchars($_SESSION['name']); ?>!</span>
         <?php } ?>
         <h1 class="hero-title">
-          Professional Care For Your Bird's Safety
+          Professional Care For Your body Safety
         </h1>
         <p class="hero-description">
-          Connect with certified avian specialists, schedule consultation slots instantly, and coordinate healthcare records within a unified clinic workspace.
+          Connect with certified medicine specialists, schedule consultation slots instantly, and coordinate healthcare records within a unified clinic workspace.
         </p>
         <div class="hero-actions">
           <a href="booking.php" class="home-btn home-btn--dark">Book Appointment</a>
@@ -113,12 +113,12 @@ if ($specs_query) {
       </div>
       <div class="hero-visual animate-hero-rise">
         <div class="hero-image-wrapper">
-          <img src="hero_illustration.jpg" alt="Clinical Avian Care Specialist" class="hero-illustration-img" />
+          <img src="hero_illustration.jpg" alt="Clinical Medicine Care Specialist" class="hero-illustration-img" />
           <div class="floating-badge badge-top">
             <span class="badge-icon">🩺</span>
             <div>
-              <strong>Avian Specialist</strong>
-              <small>Certified Veterinarians</small>
+              <strong>Medicine Specialist</strong>
+              <small>Certified Doctors</small>
             </div>
           </div>
           <div class="floating-badge badge-bottom">
@@ -169,19 +169,19 @@ if ($specs_query) {
       <div class="section-header">
         <span class="section-tag">Features</span>
         <h2>Advanced Healthcare Features</h2>
-        <p>A secure, scalable workspace tailored for patient check-ins and avian care routines.</p>
+        <p>A secure, scalable workspace tailored for patient check-ins and medicine care routines.</p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon-box">📅</div>
           <h3>Online Booking</h3>
-          <p>Review active calendars, filter veterinarian names, and lock date slots instantly without manual queues.</p>
+          <p>Review active calendars, filter doctor names, and lock date slots instantly without manual queues.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon-box">🩺</div>
           <h3>Multiple Doctors</h3>
-          <p>Browse qualified avian surgeons, general checkup practitioners, and diagnostic experts in one directory.</p>
+          <p>Browse qualified medicine specialists, general checkup practitioners, and diagnostic experts in one directory.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon-box">⏰</div>
@@ -203,14 +203,14 @@ if ($specs_query) {
       <div class="section-header">
         <span class="section-tag">Process</span>
         <h2>How The System Works</h2>
-        <p>Secure clinical appointments for your pet bird in four simple steps.</p>
+        <p>Secure clinical appointments for you in four simple steps.</p>
       </div>
 
       <div class="workflow-grid">
         <div class="workflow-step">
           <div class="step-num">01</div>
           <h4>Find Doctor</h4>
-          <p>Search by veterinarian name or filter specific avian specializations.</p>
+          <p>Search by doctor name or filter specific medical specializations.</p>
         </div>
         <div class="workflow-step">
           <div class="step-num">02</div>
@@ -225,7 +225,7 @@ if ($specs_query) {
         <div class="workflow-step">
           <div class="step-num">04</div>
           <h4>Meet Doctor</h4>
-          <p>Attend the clinic consultation and ensure your bird's safety.</p>
+          <p>Attend the clinic consultation and ensure your health and well-being.</p>
         </div>
       </div>
     </div>
@@ -236,8 +236,8 @@ if ($specs_query) {
     <div class="wrap">
       <div class="section-header">
         <span class="section-tag">Showcase</span>
-        <h2>Avian Care Specialists</h2>
-        <p>Meet our highly qualified clinic practitioners dedicated to bird safety.</p>
+        <h2>Medicine Care Specialists</h2>
+        <p>Meet our highly qualified clinic practitioners dedicated to patient health.</p>
       </div>
 
       <div class="showcase-grid">
@@ -278,11 +278,11 @@ if ($specs_query) {
     <div class="wrap stats-banner-grid">
       <div class="stats-banner-item">
         <h3><?php echo $count_docs; ?>+</h3>
-        <p>Avian Veterinarians</p>
+        <p>Medical Doctors</p>
       </div>
       <div class="stats-banner-item">
         <h3><?php echo $count_patients; ?>+</h3>
-        <p>Happy Bird Owners</p>
+        <p>Happy  Patients</p>
       </div>
       <div class="stats-banner-item">
         <h3><?php echo $count_appts; ?>+</h3>
@@ -300,11 +300,11 @@ if ($specs_query) {
             <path fill="currentColor" d="M144 256 L27.598 256 L144 139.598 Z M256 207.5 L200 256 L200 56 L0 56 L48 0 L256 0 Z M0 204.402 L0 112 L92.402 112 Z" />
           </svg>
           <span>
-            Bird Safety
+            MedLink
             <small>Appointment System</small>
           </span>
         </a>
-        <p class="footer-tagline">Providing advanced veterinary booking routines and secure clinic workspaces for bird owners worldwide.</p>
+        <p class="footer-tagline">Providing advanced medical booking routines and secure clinic workspaces for patients worldwide.</p>
       </div>
       <div class="footer-links-col">
         <h4>Quick Navigation</h4>
@@ -320,8 +320,8 @@ if ($specs_query) {
         <a href="login.php">Sign In / Register</a>
       </div>
       <div class="footer-contact-col">
-        <h4>Contact Avian Clinic</h4>
-        <p>📍 CareNest Avian Hospital, 10 Main St.</p>
+        <h4>Contact Medical Clinic</h4>
+        <p>📍  Hospital,  Main St.</p>
         <p>📞 Phone: +60 12-345 6789</p>
         <p>✉️ Email: clinic@carenest.com</p>
         <div class="footer-socials">
@@ -332,8 +332,8 @@ if ($specs_query) {
     </div>
     <div class="footer-copyright-banner">
       <div class="wrap footer-copyright-inner">
-        <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
-        <p>Streamlined Care for Avian Wellness.</p>
+        <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
+        <p>Streamlined Care for Patient Health.</p>
       </div>
     </div>
   </footer>

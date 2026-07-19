@@ -55,7 +55,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Bird Safety Appointment System</title>
+    <title>Login - MedLink Appointment System</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -69,13 +69,13 @@ if (isset($_POST['login'])) {
                     <path fill="currentColor" d="M144 256 L27.598 256 L144 139.598 Z M256 207.5 L200 256 L200 56 L0 56 L48 0 L256 0 Z M0 204.402 L0 112 L92.402 112 Z" />
                 </svg>
                 <div>
-                    <h2>Bird Safety</h2>
+                    <h2>MedLink</h2>
                     <small>Appointment System</small>
                 </div>
             </div>
 
             <h1>Welcome Back</h1>
-            <p>We are here to help make sure your birds are safe and healthy. Log in to manage your appointments, schedules, and patient profiles.</p>
+            <p>We are here to help make sure patients are safe and healthy. Log in to manage your appointments, schedules, and patient profiles.</p>
         </div>
 
         <div class="login-card">

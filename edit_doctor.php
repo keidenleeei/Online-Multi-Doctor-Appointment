@@ -99,7 +99,7 @@ if ($detail_stmt) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Doctor - Bird Safety Appointment System</title>
+  <title>Edit Doctor - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="page-bg">
@@ -111,7 +111,7 @@ if ($detail_stmt) {
       <a class="brand" href="index.php">
         <span class="brand-mark">BS</span>
         <span>
-          Bird Safety
+          MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -221,7 +221,7 @@ if ($detail_stmt) {
 
   <footer class="footer" style="margin-top: 5rem;">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>

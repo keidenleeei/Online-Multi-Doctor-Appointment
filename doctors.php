@@ -30,7 +30,7 @@ if ($stmt) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctors - Bird Safety Appointment System</title>
+  <title>Doctors - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-bg">
@@ -40,9 +40,9 @@ if ($stmt) {
   <header class="site-header content-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.php">
-        <span class="brand-mark">BS</span>
+        <span class="brand-mark">ML</span>
         <span>
-          Bird Safety
+           MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -62,8 +62,8 @@ if ($stmt) {
 
   <main class="wrap page-main">
     <div style="margin-bottom: 2rem;">
-      <h1 style="color: var(--accent); margin: 0; font-weight: 700;">Find Veterinary Specialists</h1>
-      <p style="color: var(--muted); margin-top: 0.25rem;">Search and book appointments with specialized avian doctors.</p>
+      <h1 style="color: var(--accent); margin: 0; font-weight: 700;">Find Medical Specialists</h1>
+      <p style="color: var(--muted); margin-top: 0.25rem;">Search and book appointments with specialized medical doctors.</p>
     </div>
 
     <!-- Search Form Redesign -->
@@ -71,7 +71,7 @@ if ($stmt) {
       <input
         type="text"
         name="search"
-        placeholder="Search doctor or specialization (e.g. Surgery, Avian)..."
+        placeholder="Search doctor or specialization (e.g. Surgery, Cardiology)..."
         value="<?php echo htmlspecialchars($search); ?>"
         style="flex: 1; min-width: 250px; border-radius: 999px;"
         required

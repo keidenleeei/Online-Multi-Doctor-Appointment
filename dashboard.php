@@ -68,7 +68,7 @@ if ($appointment_stmt) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Bird Safety Appointment System</title>
+  <title>Dashboard - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-bg">
@@ -80,7 +80,7 @@ if ($appointment_stmt) {
       <a class="brand" href="index.php">
         <span class="brand-mark">BS</span>
         <span>
-          Bird Safety
+          MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -208,7 +208,7 @@ if ($appointment_stmt) {
 
   <footer class="footer">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?>  Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>

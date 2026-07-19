@@ -6,7 +6,7 @@ session_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Features - Bird Safety Appointment System</title>
+  <title>Features - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-bg">
@@ -16,9 +16,9 @@ session_start();
   <header class="site-header content-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.php">
-        <span class="brand-mark">BS</span>
+        <span class="brand-mark">ML</span>
         <span>
-          Bird Safety
+          MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -44,7 +44,7 @@ session_start();
     <section class="grid-2 page-grid">
       <article class="card glass-card">
         <h3 style="color: var(--accent); margin-bottom: 1rem; font-weight: 600;">🔐 Secure Access</h3>
-        <p>Owners register pet/patient accounts and sign in using secure hashed credentials. System roles (Patient, Doctor, Admin) enforce access privileges and dashboard visibility, keeping clinical data safe.</p>
+        <p>register patient accounts and sign in using secure hashed credentials. System roles (Patient, Doctor, Admin) enforce access privileges and dashboard visibility, keeping clinical data safe.</p>
       </article>
 
       <article class="card glass-card">
@@ -66,7 +66,7 @@ session_start();
 
   <footer class="footer">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>

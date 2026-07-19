@@ -85,7 +85,7 @@ if ($app_stmt) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Dashboard - Bird Safety Appointment System</title>
+  <title>Doctor Dashboard - MedLink Appointment System</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="page-bg">
@@ -95,9 +95,9 @@ if ($app_stmt) {
   <header class="site-header content-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.php">
-        <span class="brand-mark">BS</span>
+        <span class="brand-mark">ML</span>
         <span>
-          Bird Safety
+          MedLink
           <small>Appointment System</small>
         </span>
       </a>
@@ -193,7 +193,7 @@ if ($app_stmt) {
 
   <footer class="footer" style="margin-top: 5rem;">
     <div class="wrap">
-      <p>&copy; <?php echo date('Y'); ?> Bird Safety Appointment System. All rights reserved.</p>
+      <p>&copy; <?php echo date('Y'); ?> MedLink Appointment System. All rights reserved.</p>
     </div>
   </footer>
 </body>
