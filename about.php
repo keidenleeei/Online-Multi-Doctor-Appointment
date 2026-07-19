@@ -16,7 +16,7 @@ session_start();
   <header class="site-header content-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.php">
-        <span class="brand-mark">BS</span>
+        <span class="brand-mark">ML</span>
         <span>
           MedLink
           <small>Appointment System</small>
